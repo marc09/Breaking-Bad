@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Breaking Bad - Pagina de prezentare</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* =========================
+           RESET & BAZĂ
+        ========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #050505;
+            color: #f5f5f5;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* =========================
+           PALETĂ DE CULORI
+        ========================== */
+        :root {
+            --bb-green: #0f5132;
+            --bb-green-light: #198754;
+            --bb-green-dark: #052c1c;
+            --bb-yellow: #ffc107;
+            --bb-yellow-soft: #ffe58f;
+            --bb-black: #050505;
+            --bb-gray: #343a40;
+            --bb-white: #f8f9fa;
+            --bb-accent: #00b894;
+            --bb-danger: #dc3545;
+        }
+
+        /* =========================
+           LAYOUT GENERAL
+        ========================== */
+        .page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, #000000 0%, var(--bb-green-dark) 40%, #000000 100%);
+            border-bottom: 2px solid var(--bb-green-light);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-square {
+            width: 42px;
+            height: 42px;
+            border-radius: 4px;
+            background: radial-gradient(circle at 30% 30%, #b8ffb8 0%, var(--bb-green) 40%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #b8ffb8;
+            box-shadow: 0 0 12px rgba(0, 255, 128, 0.6);
+        }
+
+        .logo-square span {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #e9ffe9;
+        }
+
+        .logo-text-main {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .logo-text-sub {
+            font-size: 0.8rem;
+            color: #d1e7dd;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding-bottom: 0.25rem;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--bb-yellow);
+            border-color: var(--bb-yellow);
+        }
+
+        .btn-cta-header {
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            border: 1px solid var(--bb-yellow);
+            color: var(--bb-yellow-soft);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-cta-header:hover {
+            background: var(--bb-yellow);
+            color: #000;
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           HERO SECTION
+        ========================== */
+        .hero {
+            background: radial-gradient(circle at top, rgba(0, 255, 128, 0.15), transparent 55%),
+                        radial-gradient(circle at bottom, rgba(255, 193, 7, 0.12), transparent 60%),
+                        url('https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat fixed;
+            position: relative;
+            color: var(--bb-white);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.95));
+        }
+
+        .hero-inner {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4.5rem 1.5rem 4rem 1.5rem;
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+            gap: 2.5rem;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .hero-tagline {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--bb-yellow-soft);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .hero-title span {
+            display: inline-block;
+            padding: 0.15rem 0.35rem;
+            margin-right: 0.15rem;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(184, 255, 184, 0.5);
+            box-shadow: 0 0 10px rgba(0, 255, 128, 0.4);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            max-width: 32rem;
+            color: #e9ecef;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .hero-meta-item {
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary {
+            padding: 0.7rem 1.4rem;
+            border-radius: 999px;
+            border: none;
+            background: var(--bb-yellow);
+            color: #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            cursor: pointer;
+            font-size: 0.9rem;
+            box-shadow: 0 0 12px rgba(255, 193, 7, 0.6);
+            transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 18px rgba(255, 193, 7, 0.9);
+            background: #ffd54d;
+        }
+
+        .btn-secondary {
+            padding: 0.7rem 1.4rem;
+            border-radius: 999px;
+            border: 1px solid var(--bb-green-light);
+            background: transparent;
+            color: var(--bb-white);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bb-green-light);
+            color: #000;
+            transform: translateY(-1px);
+        }
+
+        .hero-quote {
+            margin-top: 1.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid var(--bb-yellow);
+            font-style: italic;
+            color: #f8f9fa;
+        }
+
+        .hero-quote span {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #ced4da;
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .hero-card {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            border: 1px solid rgba(184, 255, 184, 0.4);
+            padding: 1.25rem;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-card-title {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #b8ffb8;
+        }
+
+        .hero-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .hero-rating span {
+            color: var(--bb-yellow);
+        }
+
+        .hero-card-body {
+            font-size: 0.9rem;
+            color: #e9ecef;
+        }
+
+        .hero-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+        }
+
+        .hero-card-tag {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-card-footer {
+            margin-top: 0.9rem;
+            font-size: 0.8rem;
+            color: #adb5bd;
+        }
+
+        .hero-card-footer strong {
+            color: #f8f9fa;
+        }
+
+        .hero-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .hero-mini-card {
+            background: rgba(0, 0, 0, 0.65);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.75rem;
+            font-size: 0.8rem;
+        }
+
+        .hero-mini-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #ced4da;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-mini-value {
+            font-size: 0.95rem;
+            color: #f8f9fa;
+        }
+
+        /* =========================
+           SEȚIUNE DESPRE SERIAL
+        ========================== */
+        .section {
+            padding: 3.5rem 1.5rem;
+        }
+
+        .section-alt {
+            background: radial-gradient(circle at top, rgba(0, 255, 128, 0.08), transparent 60%),
+                        linear-gradient(180deg, #050505, #0b0b0b);
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-kicker {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--bb-yellow-soft);
+            margin-bottom: 0.4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: #ced4da;
+            max-width: 36rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+            gap: 2rem;
+        }
+
+        .about-text {
+            font-size: 0.98rem;
+            color: #e9ecef;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+
+        .about-highlight {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.7);
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .about-highlight strong {
+            color: var(--bb-yellow);
+        }
+
+        .about-facts {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .about-fact {
+            padding: 0.75rem;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+        }
+
+        .about-fact-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #adb5bd;
+            margin-bottom: 0.25rem;
+        }
+
+        .about-fact-value {
+            font-size: 0.95rem;
+            color: #f8f9fa;
+        }
+
+        .about-image-card {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(184, 255, 184, 0.4);
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.9);
+            background: #000;
+        }
+
+        .about-image-top {
+            height: 220px;
+            background: url('https://images.pexels.com/photos/799443/pexels-photo-799443.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+            position: relative;
+        }
+
+        .about-image-top::after {
+            content: "I am the one who knocks.";
+            position: absolute;
+            bottom: 0.75rem;
+            left: 0.75rem;
+            padding: 0.35rem 0.6rem;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.7);
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .about-image-bottom {
+            padding: 0.9rem 1rem 1rem 1rem;
+            font-size: 0.85rem;
+            color: #e9ecef;
+        }
+
+        .about-image-bottom strong {
+            color: #b8ffb8;
+        }
+
+        /* =========================
+           PERSONAJE PRINCIPALE
+        ========================== */
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1.25rem;
+        }
+
+        .character-card {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 260px;
+        }
+
+        .character-header {
+            padding: 0.75rem 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .character-name {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .character-role {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #adb5bd;
+        }
+
+        .character-body {
+            padding: 0.75rem 0.9rem 0.9rem 0.9rem;
+            font-size: 0.85rem;
+            color: #e9ecef;
+            flex: 1;
+        }
+
+        .character-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-top: 0.5rem;
+        }
+
+        .character-tag {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .character-footer {
+            padding: 0.6rem 0.9rem 0.75rem 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.8rem;
+            color: #ced4da;
+        }
+
+        .character-quote {
+            font-style: italic;
+            color: #f8f9fa;
+        }
+
+        /* =========================
+           EPISOADE & SEZOANE
+        ========================== */
+        .seasons-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 2.2fr) minmax(0, 2.8fr);
+            gap: 2rem;
+        }
+
+        .season-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .season-item {
+            padding: 0.75rem 0.9rem;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            cursor: default;
+        }
+
+        .season-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.25rem;
+        }
+
+        .season-title {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .season-year {
+            font-size: 0.8rem;
+            color: #adb5bd;
+        }
+
+        .season-meta {
+            font-size: 0.8rem;
+            color: #ced4da;
+            margin-bottom: 0.25rem;
+        }
+
+        .season-desc {
+            font-size: 0.85rem;
+            color: #e9ecef;
+        }
+
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.9rem;
+        }
+
+        .episode-card {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.75rem;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            min-height: 150px;
+        }
+
+        .episode-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.25rem;
+        }
+
+        .episode-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .episode-number {
+            font-size: 0.75rem;
+            color: #adb5bd;
+        }
+
+        .episode-tagline {
+            font-size: 0.75rem;
+            color: #ced4da;
+            margin-bottom: 0.35rem;
+        }
+
+        .episode-desc {
+            font-size: 0.8rem;
+            color: #e9ecef;
+            flex: 1;
+        }
+
+        .episode-footer {
+            margin-top: 0.4rem;
+            font-size: 0.75rem;
+            color: #adb5bd;
+        }
+
+        /* =========================
+           CITATE MEMORABILE
+        ========================== */
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .quote-card {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.9rem;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-card::before {
+            content: "“";
+            position: absolute;
+            top: -0.5rem;
+            left: 0.4rem;
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.08);
+        }
+
+        .quote-text {
+            margin-bottom: 0.6rem;
+        }
+
+        .quote-author {
+            font-size: 0.8rem;
+            color: #adb5bd;
+        }
+
+        .quote-tag {
+            font-size: 0.75rem;
+            color: var(--bb-yellow-soft);
+            margin-top: 0.25rem;
+        }
+
+        /* =========================
+           DE CE SĂ-L VEZI
+        ========================== */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .reason-card {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.9rem;
+            font-size: 0.9rem;
+        }
+
+        .reason-title {
+            font-size: 1rem;
+            margin-bottom: 0.35rem;
+            color: #f8f9fa;
+        }
+
+        .reason-body {
+            font-size: 0.9rem;
+            color: #e9ecef;
+        }
+
+        .reason-badge {
+            display: inline-block;
+            margin-top: 0.4rem;
+            font-size: 0.75rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #ffe58f;
+        }
+
+        /* =========================
+           RECENZII & NOTE
+        ========================== */
+        .reviews-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 2.2fr) minmax(0, 2.8fr);
+            gap: 2rem;
+        }
+
+        .review-summary {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .review-score {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--bb-yellow);
+        }
+
+        .review-score-sub {
+            font-size: 0.85rem;
+            color: #adb5bd;
+        }
+
+        .review-bars {
+            margin-top: 0.75rem;
+        }
+
+        .review-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .review-bar-label {
+            font-size: 0.8rem;
+            width: 80px;
+        }
+
+        .review-bar-track {
+            flex: 1;
+            height: 6px;
+            border-radius: 999px;
+            background: #212529;
+            overflow: hidden;
+        }
+
+        .review-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--bb-yellow), var(--bb-green-light));
+        }
+
+        .review-bar-value {
+            font-size: 0.8rem;
+            width: 32px;
+            text-align: right;
+        }
+
+        .review-note {
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: #ced4da;
+        }
+
+        .review-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .review-card {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.8rem 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.25rem;
+        }
+
+        .review-source {
+            font-weight: 700;
+        }
+
+        .review-stars {
+            color: var(--bb-yellow);
+            font-size: 0.85rem;
+        }
+
+        .review-body {
+            color: #e9ecef;
+        }
+
+        .review-footer {
+            margin-top: 0.35rem;
+            font-size: 0.75rem;
+            color: #adb5bd;
+        }
+
+        /* =========================
+           ÎNTREBĂRI FRECVENTE
+        ========================== */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.9rem;
+            font-size: 0.9rem;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+
+        .faq-answer {
+            color: #e9ecef;
+            font-size: 0.9rem;
+        }
+
+        /* =========================
+           CTA FINAL
+        ========================== */
+        .cta-section {
+            background: radial-gradient(circle at center, rgba(0, 255, 128, 0.12), transparent 60%),
+                        linear-gradient(180deg, #050505, #000000);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .cta-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-subtitle {
+            font-size: 0.95rem;
+            color: #ced4da;
+            margin-bottom: 1.25rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .cta-note {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #adb5bd;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+        footer {
+            padding: 1.5rem 1.5rem 2rem 1.5rem;
+            background: #000000;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 0.8rem;
+            color: #adb5bd;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            font-size: 0.8rem;
+            color: #ced4da;
+        }
+
+        .footer-links a:hover {
+            color: var(--bb-yellow);
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+        @media (max-width: 992px) {
+            .hero-inner {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .about-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .characters-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .seasons-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .episodes-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .quotes-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .reasons-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .reviews-layout {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .faq-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .characters-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .episodes-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .quotes-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .reasons-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+    <header>
+        <div class="header-inner">
+            <div class="logo-area">
+                <div class="logo-square">
+                    <span>Br</span>
+                </div>
+                <div>
+                    <div class="logo-text-main">Breaking Bad</div>
+                    <div class="logo-text-sub">Transformarea unui profesor în legendă criminală</div>
+                </div>
+            </div>
+            <nav>
+                <a href="#despre">Despre</a>
+                <a href="#personaje">Personaje</a>
+                <a href="#episoade">Episoade</a>
+                <a href="#citate">Citate</a>
+                <a href="#de-ce">De ce să-l vezi</a>
+                <a href="#recenzii">Recenzii</a>
+                <a href="#faq">FAQ</a>
+                <button class="btn-cta-header" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+                    Începe binge-ul
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- =========================
+         HERO
+    ========================== -->
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-left">
+                <div class="hero-tagline">Drama | Crimă | Transformare</div>
+                <h1 class="hero-title">
+                    <span>Breaking</span>
+                    <span>Bad</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Un profesor de chimie diagnosticat cu cancer decide să-și folosească geniul pentru a produce metamfetamină
+                    de puritate aproape perfectă. De aici începe una dintre cele mai intense și bine scrise povești din istoria televiziunii.
+                </p>
+                <div class="hero-meta">
+                    <div class="hero-meta-item">5 sezoane</div>
+                    <div class="hero-meta-item">62 episoade</div>
+                    <div class="hero-meta-item">IMDb 9.5/10</div>
+                    <div class="hero-meta-item">Creator: Vince Gilligan</div>
+                </div>
+                <div class="hero-buttons">
+                    <button class="btn-primary">Vezi acum pe platforma ta preferată</button>
+                    <button class="btn-secondary" onclick="document.getElementById('despre').scrollIntoView({behavior:'smooth'})">
+                        Află mai multe
+                    </button>
+                </div>
+                <div class="hero-quote">
+                    „I am not in danger, Skyler. I am the danger.”
+                    <span>— Walter White</span>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-card">
+                    <div class="hero-card-header">
+                        <div class="hero-card-title">Statistici rapide</div>
+                        <div class="hero-rating">
+                            <span>★</span> 9.5 / 10
+                        </div>
+                    </div>
+                    <div class="hero-card-body">
+                        Breaking Bad este considerat de mulți critici și fani drept unul dintre cele mai bune seriale create vreodată,
+                        datorită scenariului impecabil, evoluției personajelor și tensiunii constante.
+                        <div class="hero-card-tags">
+                            <div class="hero-card-tag">Premii Emmy</div>
+                            <div class="hero-card-tag">Scriere excepțională</div>
+                            <div class="hero-card-tag">Personaje memorabile</div>
+                            <div class="hero-card-tag">Final satisfăcător</div>
+                        </div>
+                        <div class="hero-card-footer">
+                            <strong>Premii:</strong> Zeci de premii, inclusiv multiple Primetime Emmy pentru cel mai bun actor și cel mai bun serial dramatic.
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-mini-grid">
+                    <div class="hero-mini-card">
+                        <div class="hero-mini-label">Gen</div>
+                        <div class="hero-mini-value">Dramă, Crimă, Thriller psihologic</div>
+                    </div>
+                    <div class="hero-mini-card">
+                        <div class="hero-mini-label">Ton</div>
+                        <div class="hero-mini-value">Întunecat, tensionat, profund uman</div>
+                    </div>
+                    <div class="hero-mini-card">
+                        <div class="hero-mini-label">Public</div>
+                        <div class="hero-mini-value">+18, pentru fani ai dramelor mature</div>
+                    </div>
+                    <div class="hero-mini-card">
+                        <div class="hero-mini-label">Durată</div>
+                        <div class="hero-mini-value">Episoade de ~45 min, perfecte pentru binge</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         DESPRE SERIAL
+    ========================== -->
+    <section id="despre" class="section section-alt">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-kicker">Despre serial</div>
+                <h2 class="section-title">O poveste despre moralitate, alegeri și consecințe</h2>
+                <p class="section-subtitle">
+                    Breaking Bad urmărește transformarea lui Walter White dintr-un profesor de liceu aparent banal într-un
+                    lord al drogurilor temut. Serialul explorează limitele morale, sacrificiile pentru familie și prețul puterii.
+                </p>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        La început, Walter White este un om obișnuit: profesor de chimie subapreciat, tată și soț care se luptă
+                        cu probleme financiare. Diagnosticul de cancer pulmonar îi zdruncină lumea și îl împinge să ia o decizie
+                        radicală: să producă metamfetamină pentru a asigura viitorul familiei sale.
+                    </p>
+                    <p>
+                        Alături de fostul său elev, Jesse Pinkman, Walter intră într-o lume a crimei organizate, cartelurilor,
+                        violenței și minciunilor. Pe măsură ce imperiul lor crește, la fel crește și ego-ul lui Walter, iar
+                        granița dintre „fac asta pentru familie” și „fac asta pentru mine” devine tot mai neclară.
+                    </p>
+                    <p>
+                        Serialul excelează prin modul în care construiește tensiunea, prin atenția la detalii și prin felul în care
+                        fiecare decizie are consecințe reale, dureroase. Nu există personaje perfect bune sau perfect rele, ci oameni
+                        complexi, cu motivații și slăbiciuni credibile.
+                    </p>
+                    <div class="about-highlight">
+                        <strong>De ce este special?</strong> Breaking Bad nu este doar despre droguri și crimă. Este despre identitate,
+                        orgoliu, familie și despre cât de departe poate merge un om atunci când simte că nu mai are nimic de pierdut.
+                    </div>
+                    <div class="about-facts">
+                        <div class="about-fact">
+                            <div class="about-fact-label">Locație</div>
+                            <div class="about-fact-value">Albuquerque, New Mexico – un personaj în sine, cu peisaje aride și atmosferă unică.</div>
+                        </div>
+                        <div class="about-fact">
+                            <div class="about-fact-label">Stil vizual</div>
+                            <div class="about-fact-value">Cadre cinematografice, simbolism vizual, culori atent alese pentru a reflecta starea personajelor.</div>
+                        </div>
+                        <div class="about-fact">
+                            <div class="about-fact-label">Structură</div>
+                            <div class="about-fact-value">Poveste continuă, fără „episoade de umplutură”, fiecare episod împinge povestea înainte.</div>
+                        </div>
+                        <div class="about-fact">
+                            <div class="about-fact-label">Impact</div>
+                            <div class="about-fact-value">A redefinit standardele pentru serialele dramatice și a inspirat numeroase producții ulterioare.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image-card">
+                    <div class="about-image-top"></div>
+                    <div class="about-image-bottom">
+                        <strong>Heisenberg</strong> – alter ego-ul lui Walter White – devine simbolul fricii și al respectului în lumea drogurilor.
+                        Pălăria, ochelarii și atitudinea rece au transformat un profesor timid într-o legendă criminală.
+                        <br><br>
+                        Serialul surprinde perfect această transformare, pas cu pas, astfel încât, la final, te întrebi:
+                        „Când, exact, a dispărut Walter și a rămas doar Heisenberg?”
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         PERSONAJE
+    ========================== -->
+    <section id="personaje" class="section">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-kicker">Personaje principale</div>
+                <h2 class="section-title">O galerie de personaje complexe și memorabile</h2>
+                <p class="section-subtitle">
+                    Fiecare personaj din Breaking Bad are propriul arc, propriile motive și propriile momente de glorie sau cădere.
+                    Dincolo de acțiune, serialul strălucește prin profunzimea psihologică a distribuției.
+                </p>
+            </div>
+            <div class="characters-grid">
+                <div class="character-card">
+                    <div class="character-header">
+                        <div>
+                            <div class="character-name">Walter White</div>
+                            <div class="character-role">Profesor de chimie → Heisenberg</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        Un bărbat aparent obișnuit, împins de boală și frustrare să devină unul dintre cei mai temuți
+                        producători de droguri. Evoluția lui este nucleul serialului.
+                        <div class="character-tags">
+                            <div class="character-tag">Anti-erou</div>
+                            <div class="character-tag">Orgoliu</div>
+                            <div class="character-tag">Familie</div>
+                        </div>
+                    </div>
+                    <div class="character-footer">
+                        <span class="character-quote">„Say my name.”</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-header">
+                        <div>
+                            <div class="character-name">Jesse Pinkman</div>
+                            <div class="character-role">Fost elev, partener de crimă</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        Un tânăr dealer de droguri, aparent imatur, dar cu o conștiință morală surprinzătoare.
+                        Relația lui cu Walter este complexă, oscilând între loialitate, dependență și trădare.
+                        <div class="character-tags">
+                            <div class="character-tag">Empatie</div>
+                            <div class="character-tag">Vinovăție</div>
+                            <div class="character-tag">Supraviețuire</div>
+                        </div>
+                    </div>
+                    <div class="character-footer">
+                        <span class="character-quote">„Yeah, science!”</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-header">
+                        <div>
+                            <div class="character-name">Skyler White</div>
+                            <div class="character-role">Soția lui Walter</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        Skyler încearcă să-și protejeze familia, dar este prinsă în plasa minciunilor lui Walter.
+                        Personajul ei ridică întrebări dificile despre loialitate, moralitate și instinct de supraviețuire.
+                        <div class="character-tags">
+                            <div class="character-tag">Familie</div>
+                            <div class="character-tag">Conflict moral</div>
+                            <div class="character-tag">Protecție</div>
+                        </div>
+                    </div>
+                    <div class="character-footer">
+                        <span class="character-quote">„Someone has to protect this family from the man who protects this family.”</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-header">
+                        <div>
+                            <div class="character-name">Hank Schrader</div>
+                            <div class="character-role">Agent DEA</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        Cumnatul lui Walter și agent DEA dedicat, Hank este un personaj carismatic, dar și vulnerabil.
+                        Vânătoarea lui de Heisenberg devine una dintre cele mai tensionate linii narative.
+                        <div class="character-tags">
+                            <div class="character-tag">Justiție</div>
+                            <div class="character-tag">Curaj</div>
+                            <div class="character-tag">Obsesie</div>
+                        </div>
+                    </div>
+                    <div class="character-footer">
+                        <span class="character-quote">„My name is ASAC Schrader, and you can go f— yourself.”</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-header">
+                        <div>
+                            <div class="character-name">Gus Fring</div>
+                            <div class="character-role">Rege al drogurilor, om de afaceri</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        Un antagonist calm, calculat și extrem de periculos. Imaginea lui de om de afaceri respectabil
+                        ascunde un imperiu al drogurilor construit pe disciplină și frică.
+                        <div class="character-tags">
+                            <div class="character-tag">Control</div>
+                            <div class="character-tag">Răbdare</div>
+                            <div class="character-tag">Strategie</div>
+                        </div>
+                    </div>
+                    <div class="character-footer">
+                        <span class="character-quote">„I hide in plain sight, same as you.”</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-header">
+                        <div>
+                            <div class="character-name">Saul Goodman</div>
+                            <div class="character-role">Avocat „creativ”</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        Avocatul colorat și lipsit de scrupule care aduce un strop de umor negru în serial.
+                        Atât de memorabil încât a primit propriul spin-off: „Better Call Saul”.
+                        <div class="character-tags">
+                            <div class="character-tag">Umor</div>
+                            <div class="character-tag">Manipulare</div>
+                            <div class="character-tag">Supraviețuire</div>
+                        </div>
+                    </div>
+                    <div class="character-footer">
+                        <span class="character-quote">„Better call Saul!”</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-header">
+                        <div>
+                            <div class="character-name">Mike Ehrmantraut</div>
+                            <div class="character-role">Fixer, om de încredere</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        Fost polițist, acum „problem solver” pentru lumea interlopă. Calm, eficient și cu un cod moral propriu,
+                        Mike este unul dintre cele mai respectate personaje din universul Breaking Bad.
+                        <div class="character-tags">
+                            <div class="character-tag">Profesionalism</div>
+                            <div class="character-tag">Loyalty</div>
+                            <div class="character-tag">Tragedie</div>
+                        </div>
+                    </div>
+                    <div class="character-footer">
+                        <span class="character-quote">„No more half-measures.”</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-header">
+                        <div>
+                            <div class="character-name">Walter Jr.</div>
+                            <div class="character-role">Fiul lui Walter</div>
+                        </div>
+                    </div>
+                    <div class="character-body">
+                        Reprezintă inocența și partea de familie pe care Walter pretinde că o protejează.
+                        Relația lor devine tot mai tensionată pe măsură ce adevărul iese la iveală.
+                        <div class="character-tags">
+                            <div class="character-tag">Inocență</div>
+                            <div class="character-tag">Familie</div>
+                            <div class="character-tag">Dezamăgire</div>
+                        </div>
+                    </div>
+                    <div class="character-footer">
+                        <span class="character-quote">„Why don’t you just die already?”</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         EPISOADE & SEZOANE
+    ========================== -->
+    <section id="episoade" class="section section-alt">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-kicker">Structura serialului</div>
+                <h2 class="section-title">5 sezoane, 62 de episoade, zero timp pierdut</h2>
+                <p class="section-subtitle">
+                    Fiecare sezon ridică miza, iar fiecare episod contează. Nu există „umplutură” – doar o poveste care
+                    se intensifică până la un final memorabil.
+                </p>
+            </div>
+            <div class="seasons-layout">
+                <div class="season-list">
+                    <div class="season-item">
+                        <div class="season-title-row">
+                            <div class="season-title">Sezonul 1</div>
+                            <div class="season-year">2008</div>
+                        </div>
+                        <div class="season-meta">7 episoade • Introducerea lui Walter și Jesse, începutul imperiului.</div>
+                        <div class="season-desc">
+                            Un sezon scurt, dar extrem de intens, care pune bazele transformării lui Walter și a parteneriatului
+                            cu Jesse. De la primul cook în rulotă până la primele consecințe grave.
+                        </div>
+                    </div>
+                    <div class="season-item">
+                        <div class="season-title-row">
+                            <div class="season-title">Sezonul 2</div>
+                            <div class="season-year">2009</div>
+                        </div>
+                        <div class="season-meta">13 episoade • Extinderea afacerii, consecințe tragice.</div>
+                        <div class="season-desc">
+                            Afacerea crește, la fel și riscurile. Sezonul 2 este cunoscut pentru construcția sa meticuloasă,
+                            care duce la un final șocant, prefigurat subtil încă din primele episoade.
+                        </div>
+                    </div>
+                    <div class="season-item">
+                        <div class="season-title-row">
+                            <div class="season-title">Sezonul 3</div>
+                            <div class="season-year">2010</div>
+                        </div>
+                        <div class="season-meta">13 episoade • Intrarea lui Gus Fring în prim-plan.</div>
+                        <div class="season-desc">
+                            Walter și Jesse se adâncesc în lumea cartelurilor, iar Gus Fring devine o prezență dominantă.
+                            Tensiunea dintre loialitate și supraviețuire atinge noi niveluri.
+                        </div>
+                    </div>
+                    <div class="season-item">
+                        <div class="season-title-row">
+                            <div class="season-title">Sezonul 4</div>
+                            <div class="season-year">2011</div>
+                        </div>
+                        <div class="season-meta">13 episoade • Jocul de șah dintre Walter și Gus.</div>
+                        <div class="season-desc">
+                            Un sezon construit ca un thriller psihologic, în care fiecare mișcare contează. Finalul sezonului 4
+                            este considerat de mulți drept unul dintre cele mai satisfăcătoare din istoria televiziunii.
+                        </div>
+                    </div>
+                    <div class="season-item">
+                        <div class="season-title-row">
+                            <div class="season-title">Sezonul 5</div>
+                            <div class="season-year">2012–2013</div>
+                        </div>
+                        <div class="season-meta">16 episoade • Apogeul și căderea lui Heisenberg.</div>
+                        <div class="season-desc">
+                            Ultimul sezon este împărțit în două părți și urmărește consecințele finale ale deciziilor lui Walter.
+                            Totul se închide într-un mod coerent, intens și emoționant.
+                        </div>
+                    </div>
+                </div>
+                <div class="episodes-grid">
+                    <div class="episode-card">
+                        <div class="episode-header">
+                            <div class="episode-name">Pilot</div>
+                            <div class="episode-number">S1E1</div>
+                        </div>
+                        <div class="episode-tagline">Începutul unei vieți duble</div>
+                        <div class="episode-desc">
+                            Walter află că are cancer și, după o razie a DEA, decide să se asocieze cu Jesse pentru a produce
+                            metamfetamină. Prima rulotă, primul cook, primele probleme.
+                        </div>
+                        <div class="episode-footer">Ton: șoc, decizie, început de drum.</div>
+                    </div>
+
+                    <div class="episode-card">
+                        <div class="episode-header">
+                            <div class="episode-name">Crazy Handful of Nothin'</div>
+                            <div class="episode-number">S1E6</div>
+                        </div>
+                        <div class="episode-tagline">Nașterea lui Heisenberg</div>
+                        <div class="episode-desc">
+                            Walter își asumă pentru prima dată identitatea de Heisenberg, confruntându-se cu Tuco.
+                            Un episod definitoriu pentru noua lui personalitate.
+                        </div>
+                        <div class="episode-footer">Moment cheie: pălăria, atitudinea, respectul prin frică.</div>
+                    </div>
+
+                    <div class="episode-card">
+                        <div class="episode-header">
+                            <div class="episode-name">Phoenix</div>
+                            <div class="episode-number">S2E12</div>
+                        </div>
+                        <div class="episode-tagline">Decizii ireversibile</div>
+                        <div class="episode-desc">
+                            Walter asistă pasiv la un moment critic care va avea consecințe devastatoare.
+                            Un episod care arată cât de departe este dispus să meargă.
+                        </div>
+                        <div class="episode-footer">Teme: moralitate, vinovăție, sacrificiu rece.</div>
+                    </div>
+
+                    <div class="episode-card">
+                        <div class="episode-header">
+                            <div class="episode-name">One Minute</div>
+                            <div class="episode-number">S3E7</div>
+                        </div>
+                        <div class="episode-tagline">Tensiune pură</div>
+                        <div class="episode-desc">
+                            Hank se confruntă cu consecințele investigațiilor sale, iar episodul livrează una dintre cele mai
+                            intense scene de acțiune din serial.
+                        </div>
+                        <div class="episode-footer">Ton: suspans, pericol iminent.</div>
+                    </div>
+
+                    <div class="episode-card">
+                        <div class="episode-header">
+                            <div class="episode-name">Ozymandias</div>
+                            <div class="episode-number">S5E14</div>
+                        </div>
+                        <div class="episode-tagline">Căderea totală</div>
+                        <div class="episode-desc">
+                            Considerat de mulți cel mai bun episod al serialului (și unul dintre cele mai bune episoade TV din toate timpurile),
+                            „Ozymandias” arată prăbușirea completă a lui Walter.
+                        </div>
+                        <div class="episode-footer">Ton: tragedie, pierdere, adevăr crud.</div>
+                    </div>
+
+                    <div class="episode-card">
+                        <div class="episode-header">
+                            <div class="episode-name">Felina</div>
+                            <div class="episode-number">S5E16</div>
+                        </div>
+                        <div class="episode-tagline">Finalul unei ere</div>
+                        <div class="episode-desc">
+                            Ultimul episod închide povestea într-un mod satisfăcător, oferind în același timp emoție, justiție
+                            și o ultimă demonstrație a geniului lui Walter.
+                        </div>
+                        <div class="episode-footer">Ton: închidere, catharsis, inevitabil.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         CITATE
+    ========================== -->
+    <section id="citate" class="section">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-kicker">Replica memorabile</div>
+                <h2 class="section-title">Citate care au intrat în cultura pop</h2>
+                <p class="section-subtitle">
+                    Dialogul din Breaking Bad este inteligent, tăios și plin de replici care au devenit instant clasice.
+                    Iată doar câteva dintre ele.
+                </p>
+            </div>
+            <div class="quotes-grid">
+                <div class="quote-card">
+                    <div class="quote-text">
+                        „I am not in danger, Skyler. I am the danger. A guy opens his door and gets shot and you think that of me?
+                        No. I am the one who knocks!”
+                    </div>
+                    <div class="quote-author">— Walter White</div>
+                    <div class="quote-tag">Putere, frică, identitate</div>
+                </div>
+
+                <div class="quote-card">
+                    <div class="quote-text">
+                        „Say my name.”<br>
+                        „You're Heisenberg.”<br>
+                        „You're goddamn right.”
+                    </div>
+                    <div class="quote-author">— Walter White &amp; Declan</div>
+                    <div class="quote-tag">Respect prin frică</div>
+                </div>
+
+                <div class="quote-card">
+                    <div class="quote-text">
+                        „No more half-measures.” – un motto care rezumă perfect filosofia lui Mike și, treptat, a lui Walter.
+                    </div>
+                    <div class="quote-author">— Mike Ehrmantraut</div>
+                    <div class="quote-tag">Decizii radicale</div>
+                </div>
+
+                <div class="quote-card">
+                    <div class="quote-text">
+                        „Yeah, science!” – entuziasmul lui Jesse pentru chimia lui Mr. White, într-o scenă care îmbină umorul
+                        cu ingeniozitatea.
+                    </div>
+                    <div class="quote-author">— Jesse Pinkman</div>
+                    <div class="quote-tag">Umor, chimie, complicitate</div>
+                </div>
+
+                <div class="quote-card">
+                    <div class="quote-text">
+                        „If you don’t know who I am, then maybe your best course would be to tread lightly.”
+                    </div>
+                    <div class="quote-author">— Walter White</div>
+                    <div class="quote-tag">Amenințare subtilă</div>
+                </div>
+
+                <div class="quote-card">
+                    <div class="quote-text">
+                        „I did it for me. I liked it. I was good at it. And I was really... I was alive.”
+                    </div>
+                    <div class="quote-author">— Walter White</div>
+                    <div class="quote-tag">Adevărul final</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         DE CE SĂ-L VEZI
+    ========================== -->
+    <section id="de-ce" class="section section-alt">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-kicker">De ce merită</div>
+                <h2 class="section-title">De ce merită să vezi Breaking Bad acum</h2>
+                <p class="section-subtitle">
+                    Chiar dacă a trecut ceva timp de la lansare, Breaking Bad rămâne la fel de relevant, intens și captivant.
+                    Iată câteva motive pentru care merită să-i dai o șansă (sau un rewatch).
+                </p>
+            </div>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <div class="reason-title">1. Scriere impecabilă</div>
+                    <div class="reason-body">
+                        Fiecare sezon este planificat cu atenție, fără episoade de umplutură. Fiecare detaliu contează,
+                        iar payoff-ul pentru momentele prefigurate este extrem de satisfăcător.
+                    </div>
+                    <div class="reason-badge">Storytelling de top</div>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-title">2. Evoluția personajelor</div>
+                    <div class="reason-body">
+                        Vezi cum personajele se schimbă în mod credibil, uneori dureros. Walter, Jesse, Skyler, Hank și ceilalți
+                        trec prin transformări care te fac să-i înțelegi, chiar dacă nu îi poți scuza.
+                    </div>
+                    <div class="reason-badge">Arcuri narative puternice</div>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-title">3. Tensiune constantă</div>
+                    <div class="reason-body">
+                        Serialul este plin de momente în care îți ții respirația. De la negocieri cu carteluri la situații
+                        aparent banale care pot exploda în orice moment.
+                    </div>
+                    <div class="reason-badge">Suspans autentic</div>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-title">4. Estetică cinematografică</div>
+                    <div class="reason-body">
+                        Fiecare cadru este gândit ca într-un film. Culorile, unghiurile de filmare și simbolurile vizuale
+                        contribuie la atmosferă și la poveste.
+                    </div>
+                    <div class="reason-badge">Cinematografie</div>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-title">5. Tematică profundă</div>
+                    <div class="reason-body">
+                        Serialul pune întrebări despre moralitate, putere, responsabilitate și identitate. Nu oferă răspunsuri
+                        simple, ci te lasă să reflectezi.
+                    </div>
+                    <div class="reason-badge">Reflecție personală</div>
+                </div>
+
+                <div class="reason-card">
+                    <div class="reason-title">6. Final satisfăcător</div>
+                    <div class="reason-body">
+                        Spre deosebire de multe alte seriale, Breaking Bad reușește să ofere un final coerent, emoționant și
+                        demn de povestea construită.
+                    </div>
+                    <div class="reason-badge">Închidere perfectă</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         RECENZII
+    ========================== -->
+    <section id="recenzii" class="section">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-kicker">Ce spun criticii și fanii</div>
+                <h2 class="section-title">Unul dintre cele mai apreciate seriale din toate timpurile</h2>
+                <p class="section-subtitle">
+                    Breaking Bad a primit laude aproape unanime din partea criticilor și a publicului, devenind un reper
+                    pentru ceea ce înseamnă televiziune de calitate.
+                </p>
+            </div>
+            <div class="reviews-layout">
+                <div class="review-summary">
+                    <div class="review-score">9.5</div>
+                    <div class="review-score-sub">Scor mediu pe platforme de rating (IMDb, Metacritic, Rotten Tomatoes)</div>
+                    <div class="review-bars">
+                        <div class="review-bar-row">
+                            <div class="review-bar-label">Scenariu</div>
+                            <div class="review-bar-track">
+                                <div class="review-bar-fill" style="width: 97%;"></div>
+                            </div>
+                            <div class="review-bar-value">9.7</div>
+                        </div>
+                        <div class="review-bar-row">
+                            <div class="review-bar-label">Actorie</div>
+                            <div class="review-bar-track">
+                                <div class="review-bar-fill" style="width: 98%;"></div>
+                            </div>
+                            <div class="review-bar-value">9.8</div>
+                        </div>
+                        <div class="review-bar-row">
+                            <div class="review-bar-label">Regie</div>
+                            <div class="review-bar-track">
+                                <div class="review-bar-fill" style="width: 96%;"></div>
+                            </div>
+                            <div class="review-bar-value">9.6</div>
+                        </div>
+                        <div class="review-bar-row">
+                            <div class="review-bar-label">Rewatch</div>
+                            <div class="review-bar-track">
+                                <div class="review-bar-fill" style="width: 94%;"></div>
+                            </div>
+                            <div class="review-bar-value">9.4</div>
+                        </div>
+                    </div>
+                    <div class="review-note">
+                        Serialul a câștigat numeroase premii Emmy, inclusiv pentru cel mai bun actor (Bryan Cranston),
+                        cel mai bun actor secundar (Aaron Paul) și cel mai bun serial dramatic. Este adesea menționat în topurile
+                        „Best TV Shows of All Time”.
+                    </div>
+                </div>
+                <div class="review-list">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-source">Critic TV</div>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                        <div class="review-body">
+                            „Breaking Bad este un masterclass în storytelling. Fiecare sezon ridică miza, iar finalul este
+                            atât de bine executat încât îți rămâne în minte mult timp după ce se termină.”
+                        </div>
+                        <div class="review-footer">— Recenzie critică</div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-source">Fan pe forum</div>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                        <div class="review-body">
+                            „Nu am mai văzut un serial în care să nu simt nevoia să sar peste niciun episod. Totul contează,
+                            totul are sens. E genul de serial pe care îl revezi și descoperi detalii noi.”
+                        </div>
+                        <div class="review-footer">— Părere fan</div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-source">Blog de film</div>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                        <div class="review-body">
+                            „Breaking Bad a ridicat ștacheta pentru televiziune. A demonstrat că serialele pot avea aceeași
+                            profunzime și calitate ca filmele de cinema, dacă nu chiar mai mult.”
+                        </div>
+                        <div class="review-footer">— Analiză de specialitate</div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-source">Utilizator random</div>
+                            <div class="review-stars">★★★★★</div>
+                        </div>
+                        <div class="review-body">
+                            „Am zis că mă uit doar la un episod. Am ajuns să termin un sezon într-o singură noapte. Nu regret nimic.”
+                        </div>
+                        <div class="review-footer">— Experiență de binge reală</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         FAQ
+    ========================== -->
+    <section id="faq" class="section section-alt">
+        <div class="section-inner">
+            <div class="section-header">
+                <div class="section-kicker">Întrebări frecvente</div>
+                <h2 class="section-title">Încă eziti? Hai să clarificăm câteva lucruri</h2>
+                <p class="section-subtitle">
+                    Dacă nu ești sigur că Breaking Bad e pentru tine, poate răspunsurile de mai jos te ajută să decizi.
+                </p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">Trebuie să fiu fan al filmelor cu droguri sau crimă ca să-mi placă?</div>
+                    <div class="faq-answer">
+                        Nu neapărat. Deși decorul este lumea drogurilor, în centrul poveștii sunt personajele, alegerile lor
+                        și consecințele morale. Dacă îți plac dramele psihologice și poveștile bine scrise, ai șanse mari să-l apreciezi.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Este foarte violent?</div>
+                    <div class="faq-answer">
+                        Serialul conține violență și scene intense, dar nu este gratuită. De obicei, violența are un rol clar
+                        în poveste și subliniază gravitatea situațiilor. Totuși, este recomandat pentru public matur.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Câte episoade are și cât durează?</div>
+                    <div class="faq-answer">
+                        Are 62 de episoade, împărțite în 5 sezoane. Majoritatea episoadelor durează aproximativ 45 de minute,
+                        ceea ce îl face perfect pentru sesiuni de binge, dar și pentru vizionare în ritm mai lent.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Merită dacă am văzut deja spoilere?</div>
+                    <div class="faq-answer">
+                        Da. Chiar dacă știi câteva momente cheie, farmecul serialului stă în drum, nu doar în destinație:
+                        în dialog, tensiune, joc actoricesc și detalii vizuale.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Este greu de urmărit din punct de vedere emoțional?</div>
+                    <div class="faq-answer">
+                        Unele episoade sunt intense și emoțional, și moral. Dar tocmai această intensitate îl face memorabil.
+                        Poți oricând să iei pauze între episoade dacă simți nevoia.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Trebuie să văd și „Better Call Saul” sau „El Camino”?</div>
+                    <div class="faq-answer">
+                        Nu este obligatoriu, Breaking Bad are o poveste completă de sine stătătoare. Totuși, dacă îți place
+                        universul, „Better Call Saul” și filmul „El Camino” extind și îmbogățesc experiența.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         CTA FINAL
+    ========================== -->
+    <section id="cta" class="section cta-section">
+        <div class="cta-inner">
+            <h2 class="cta-title">Gata să intri în lumea lui Heisenberg?</h2>
+            <p class="cta-subtitle">
+                Fie că îl vezi pentru prima dată sau revii pentru un rewatch, Breaking Bad îți promite o experiență intensă,
+                plină de emoție, suspans și momente de neuitat.
+            </p>
+            <div class="cta-buttons">
+                <button class="btn-primary">Începe cu episodul „Pilot”</button>
+                <button class="btn-secondary" onclick="document.getElementById('episoade').scrollIntoView({behavior:'smooth'})">
+                    Vezi structura pe sezoane
+                </button>
+            </div>
+            <div class="cta-note">
+                Atenție: odată ce începi, s-ar putea să nu te mai poți opri. Binge responsabil.
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer>
+        <div class="footer-inner">
+            <div>
+                Pagina aceasta este un omagiu adus serialului „Breaking Bad” și nu reprezintă un site oficial.
+                Toate drepturile asupra brandului aparțin creatorilor și distribuitorilor originali.
+            </div>
+            <div class="footer-links">
+                <a href="#despre">Despre</a>
+                <a href="#personaje">Personaje</a>
+                <a href="#episoade">Episoade</a>
+                <a href="#citate">Citate</a>
+                <a href="#de-ce">De ce să-l vezi</a>
+                <a href="#recenzii">Recenzii</a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>
